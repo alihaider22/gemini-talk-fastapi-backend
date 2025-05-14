@@ -8,7 +8,11 @@ from langchain_core.messages import HumanMessage
 # Load environment variables from .env file
 load_dotenv()
 
-app = FastAPI()
+app = FastAPI(
+    title="Gemini Talk API",
+    description="API for streaming responses from Google's Gemini model",
+    version="1.0.0"
+)
 
 # Get API key from environment variable
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
