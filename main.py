@@ -4,6 +4,7 @@ import asyncio
 import logging
 from dotenv import load_dotenv
 from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import HumanMessage
 
@@ -18,6 +19,17 @@ app = FastAPI(
     title="Gemini Talk API",
     description="API for streaming responses from Google's Gemini model",
     version="1.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",  # Local development
+        # "https://your-frontend-domain.com",  # Production domain
+    ],
+    allow_credentials=True,
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
 )
 
 # Get API key from environment variable
